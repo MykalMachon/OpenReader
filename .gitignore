@@ -21,3 +21,6 @@ openreader
 # Go workspace file
 go.work
 go.work.sum
+
+# Database files 
+*.sqlite
