@@ -16,9 +16,18 @@ func Init(file string) (*sql.DB, error) {
 		return nil, err
 	}
 
-	// set the proper pragms for us
-	// TODO: enable WAL mode
-	// TODO: enforce relationships
+	// set the proper pragmas
+	_, err = db.Exec(`PRAGMA journal_mode = WAL;`)
+
+	if err != nil {
+		fmt.Println("failed to set the journal mode to WAL", err)
+		return nil, err
+	}
+
+	_, err = db.Exec(`PRAGMA foreign_keys = ON;`)
+	if err != nil {
+		fmt.Println("failed to set enforce foreign_keys on database", err)
+	}
 
 	// create basic tables
 	_, err = db.Exec(`
