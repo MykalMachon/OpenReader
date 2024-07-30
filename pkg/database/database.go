@@ -3,9 +3,25 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"time"
 
 	_ "github.com/mattn/go-sqlite3"
 )
+
+type Author struct {
+	Id   int
+	Name string
+}
+
+type Book struct {
+	id            int
+	name          string
+	author_id     string
+	file_location string
+	ingested_at   time.Time
+	status        string
+	pages         int
+}
 
 func Init(file string) (*sql.DB, error) {
 	// create or open database
