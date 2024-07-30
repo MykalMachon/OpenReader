@@ -1,4 +1,7 @@
 # OpenReader
+
+![](https://github.com/mykalmachon/openreader/actions/workflows/tests.yml/badge.svg)
+
 an open source multi-modal lightweight e-reader software. 
 
 ## Goals and inspiration
