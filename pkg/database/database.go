@@ -31,14 +31,27 @@ func Init(file string) (*sql.DB, error) {
 
 	// create basic tables
 	_, err = db.Exec(`
+		CREATE TABLE IF NOT EXISTS authors (
+			id INTEGER PRIMARY KEY, 
+			name TEXT
+		);
+	`)
+
+	if err != nil {
+		fmt.Println("failed to create a authors table", err)
+		panic(err)
+	}
+
+	_, err = db.Exec(`
 		CREATE TABLE IF NOT EXISTS books (
 			id INTEGER PRIMARY KEY,
 			name TEXT,
-			author TEXT,
+			author_id INTEGER,
 			file_location TEXT,
 			ingested_at TEXT DEFAULT CURRENT_TIMESTAMP,
 			status TEXT,
-			pages INTEGER
+			pages INTEGER,
+			FOREIGN KEY (author_id) REFERENCES authors(id)
 		);
 	`)
 
